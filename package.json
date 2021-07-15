@@ -1,0 +1,16 @@
+{
+  "name": "node-postgres",
+  "version": "1.0.0",
+  "description": "Free Heroku Postgresql db",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "ISC"
+  },
+  "author": "Kalio Fernando O'Farril Villalpando",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "pg": "^8.6.0"
+  }
+}
