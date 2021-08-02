@@ -45,8 +45,15 @@ const getUser = (body) => {
         (error, results) =>{
           if(error){
             reject(error);
-          }o
-          resolve(true);
+          }
+          
+          if(results.rows[0].count == 1){
+            resolve(true);
+          }else{
+            resolve(false);
+          }
+          
+         //resolve(results.rows[0].count);
         }
       )
     })

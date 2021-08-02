@@ -25,8 +25,8 @@ app.post('/getUser', (req, res) => {
 })
 
 
-app.get('/getUserName', (req,res) => {
-  user_model.getUserName(req.params.userName)
+app.get('/getUserName', (req, res) => {
+  user_model.getUserName(req.query.userName)
   .then(response => {
     res.status(200).send(response);
   })
