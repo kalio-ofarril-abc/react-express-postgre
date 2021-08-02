@@ -1,10 +1,12 @@
-const express = require('express')
-const app = express()
-const port = 3001
+const express = require('express');
+const app = express();
+const port = 3001;
 
-const story_model = require('./story_model')
+const user_model = require('./user_model');
 
-app.use(express.json())
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+
 app.use(function (req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
@@ -12,8 +14,8 @@ app.use(function (req, res, next) {
   next();
 });
 
-app.get('/', (req, res) => {
-  story_model.getUsers()
+app.post('/getUser', (req, res) => {
+  user_model.getUser(req.body)
   .then(response => {
     res.status(200).send(response);
   })
@@ -22,8 +24,9 @@ app.get('/', (req, res) => {
   })
 })
 
-app.post('/users', (req, res) => {
-  story_model.createUser(req.body)
+
+app.get('/getUserName', (req,res) => {
+  user_model.getUserName(req.params.userName)
   .then(response => {
     res.status(200).send(response);
   })
@@ -31,6 +34,18 @@ app.post('/users', (req, res) => {
     res.status(500).send(error);
   })
 })
+
+
+app.post('/createUser', (req, res) => {
+  user_model.createUser(req.body)
+  .then(response => {
+    res.status(200).send(response);
+  })
+  .catch(error => {
+    res.status(500).send(error);
+  })
+})
+
 
 app.delete('/merchants/:id', (req, res) => {
   merchant_model.deleteMerchant(req.params.id)
